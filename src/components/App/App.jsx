@@ -1,11 +1,11 @@
-import React from "react";
+import {Component} from "react";
 import { nanoid } from "nanoid";
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from "components/Filter/Filter";
 import { ContactList } from "components/ContactList/ContactList";
 import { Container, Section, TitleH1, TitleH2 } from "./App.styled";
 
-export class App extends React.Component {
+export class App extends Component {
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -17,15 +17,16 @@ export class App extends React.Component {
   };
 
   addContact = ({ name, number }) => {
+    const { contacts } = this.state
     const normalizedFind = name.toLowerCase();
-    const findName = this.state.contacts.find(
+    const findName = contacts.find(
       contact => contact.name.toLowerCase() === normalizedFind
     );
     if (findName) {
       return alert(`${name} is already in contacts.`);
     }
 
-    const findNumber = this.state.contacts.find(contact => contact.number === number);
+    const findNumber = contacts.find(contact => contact.number === number);
 
     if (findNumber) {
       return alert(`This phone number is already in use.`);
